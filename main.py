@@ -58,7 +58,7 @@ def send_discord_webhook(site):
 	        },
 	        {
 	          "name": "To check downtime visit",
-	          "value": "https://panel.herotech.cf"
+	          "value": "link to your site"
 	        }
 	      ]
 	    }

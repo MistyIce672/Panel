@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Uptime Checker</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+	<div class="boxes">
+	    {% for url, uptime in uptime_dict.items() %}
+	    <div class="box">
+	        <div>
+			<div class="circle-wrap">
+		        <div class="circle">
+			        <div class="mask full" style="transform: rotate({{uptime|round(2) *1.8 }}deg);">
+			            <div class="fill" style="transform: rotate({{uptime|round(2) *1.8 }}deg);"></div>
+			        </div>
+			        	<div class="mask half">
+			            	<div class="fill" style="transform: rotate({{uptime|round(2) *1.8 }}deg);"></div>
+			          	</div>
+			        <div class="inside-circle"> {{ uptime|round(2) }}</div>
+			    </div>
+		    </div>
+			</div>
+			<a href="{{ url }}">{{ url }}</a>
+	    </div>
+	    {% endfor %}
+	</div>
+</body>
+</html>

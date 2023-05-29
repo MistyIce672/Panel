@@ -26,13 +26,15 @@ def check_status():
             response = requests.get(url, timeout=5)
             if response.status_code == 200:
                 status = 'up'
+                statuses.append({'url': url, 'status': status, 'timestamp': datetime.now().isoformat()})
             else:
                 status = 'down'
                 send_discord_webhook(url)
+                statuses.append({'url': url, 'status': status, 'timestamp': datetime.now().isoformat()})
         except:
-        	send_discord_webhook(url)
-        	status = 'down'
-        statuses.append({'url': url, 'status': status, 'timestamp': datetime.now().isoformat()})
+            send_discord_webhook(url)
+            status = 'down'
+            statuses.append({'url': url, 'status': status, 'timestamp': datetime.now().isoformat()})
     return statuses
 
 def update_status():
@@ -49,7 +51,7 @@ def send_discord_webhook(site):
     accounts = get_all_accounts()
     hooks = accounts["hooks"]
     for url in hooks:
-        url = 'https://discord.com/api/webhooks/1082230304242143264/M6HDjS3gQVCzrUjLytl1LawsVVFq_uvl0srlnLYrCdFummzMj9DdHxEnDvGF6Wr-sRqT'
+        url = 'https://discord.com/api/webhooks/1092109678877614150/pLh6ZJX9ZHBOj4bMd9v8LK8uffCcwhvk3P0IHz8U90f3i8APf8F71JUr6TiKKB29OaDX'
         message = f'{site} did not respond properly'
         data = {
     	  "content": None ,
@@ -189,4 +191,4 @@ def save_all_accounts(accounts):
 
 if __name__ == '__main__':
     update_status()
-    app.run()
+    app.run(host="0.0.0.0",port=9119)
